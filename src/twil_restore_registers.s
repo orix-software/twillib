@@ -1,7 +1,7 @@
 .include "twilighte.inc"
 .include "telestrat.inc"
 
-.import tmp1,tmp2
+.importzp tmp1,tmp2
 
 .import save_bank
 
