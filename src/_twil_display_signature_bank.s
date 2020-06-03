@@ -1,11 +1,8 @@
 .importzp ptr1,ptr2
 .import popa
-.import tmp1,tmp2
 
 .include "twilighte.inc"
 .include "telestrat.inc"
-
-
 
 .export  _twil_display_signature_bank
 
@@ -15,16 +12,9 @@
 
 .proc _twil_display_signature_bank
     sei
-    
-        ; Save banking register
-    ldx     TWILIGHTE_BANKING_REGISTER
-    stx     tmp1
+    jsr     twil_save_registers
+    ; Save banking register
 
-    ldx     TWILIGHTE_REGISTER
-    stx     tmp2
-
-    ldx     VIA2::PRA
-    stx     save_bank
     
     ;  switch to right bank
     and     #%00000111
@@ -78,16 +68,7 @@
     lda     #$00
     sta     bank_signature,y
 
-
-    ldx     save_bank
-    stx     VIA2::PRA
-
-    lda     tmp1
-    sta     TWILIGHTE_BANKING_REGISTER
-
-    ldx     tmp2
-    stx     TWILIGHTE_REGISTER
-   
+    jsr     twil_restore_registers
 
     cli 
     lda     #<bank_signature
