@@ -4,6 +4,9 @@
 .include "twilighte.inc"
 .include "telestrat.inc"
 
+.import twil_save_registers
+.import twil_restore_registers
+
 .export  _twil_display_signature_bank
 
 .define MAX_SIGNATURE_LENGTH 40
