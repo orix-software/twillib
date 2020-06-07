@@ -88,14 +88,7 @@ reset_label:
 
 start:
 
-	; Erase 
-	lda		sector_to_update
-	sta  	TWILIGHTE_BANKING_REGISTER
 
-
-
-;	lda		#'1'
-;	sta     value_to_display
 
 	lda		#$00
 	sta		ptr3
@@ -103,8 +96,8 @@ start:
 	lda		#$C0
 	sta		ptr3+1	
 
-    lda		#$FF
-    tay
+    lda		#$00
+    ldy     #$40
     jsr		_ch376_set_bytes_read
 
 @loop:
@@ -117,49 +110,26 @@ start:
 	sta		nb_bytes
     ; Tester si userzp == 0?
 
-;	lda		current_bank
-;	clc
- ;   adc		#$30
-;	sta     $bb80+21
-
+    ldy    #$00
 
   @read_byte:
 	
     lda		CH376_DATA
-
-    ldy		#$00
 	sta		(ptr3),y
-	;    pha
-	;jsr		write_kernel
-	;pla
-
-
-
-;	lda     value_to_display
-@display:
-;	ldx		posx
- ; 	sta		$bb80+40,x
-;	inx
-;	stx		posx
-
-	lda		ptr3+1
-	bne     @skip_change_bank
-
-	lda		ptr3
-	bne     @skip_change_bank	
-
-	; end we stop
-
-
-	lda     #$00
-	cli
-	rts
-
+    iny
 
 @skip_change_bank:
 
     dec		nb_bytes
     bne		@read_byte
+    
+    tya     
+    clc
+    adc     ptr3
+    bcc     @skip_inc
+    inc     ptr3+1
+@skip_inc:
+    sta     ptr3    
 
     lda		#CH376_BYTE_RD_GO
     sta		CH376_COMMAND
@@ -179,8 +149,7 @@ start:
 
 str_slash:
 	.asciiz "/"
-posx:
-	.res 1	
+
 .endproc
 
 current_bank:
