@@ -35,6 +35,15 @@
 	
     jsr     popa ; get bank
     sta     current_bank
+
+
+    lda     VIA2::PRA
+    and     #%11111000
+    ora     current_bank
+    sta     VIA2::PRA
+    
+	
+
 	
     lda     sector_to_update ; pour debug FIXME, cela devrait être à 4
     sta  	TWILIGHTE_BANKING_REGISTER
