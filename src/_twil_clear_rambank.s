@@ -20,14 +20,15 @@
 .proc _twil_clear_rambank
 	sei
 	sta		sector_to_update
-    sta     $5000
+  ;  sta     $5000
 
 	jsr     twil_save_registers
 	; on swappe pour que les banques 8,7,6,5 se retrouvent en bas en id : 1, 2, 3, 4
 	
     jsr     popa ; get bank
+    lda     #$01
     sta     current_bank
-    sta     $5001
+ ;   sta     $5001
 
     lda     VIA2::PRA
     and     #%11111000
@@ -47,6 +48,7 @@
     
     lda     #>IRQVECTOR
     sta     $FFFF
+
 
     lda     #<$c000
     sta     $fff8
