@@ -18,23 +18,21 @@
 .export _twil_program_rambank
 
 .proc _twil_program_rambank
-	sei
-	sta		sector_to_update
 
-	;lda		#$00
-	;sta	    pos_cputc
+	sta		sector_to_update
 
 	jsr 	popax ; Get file
 	sta     ptr1
 	stx		ptr1+1
 
-	;lda     #$00
-	;sta     posx
+    jsr     popa ; get bank
+    sta     current_bank
+
+
+	sei
 	jsr     twil_save_registers
 	; on swappe pour que les banques 8,7,6,5 se retrouvent en bas en id : 1, 2, 3, 4
 	
-    jsr     popa ; get bank
-    sta     current_bank
 
 
     lda     VIA2::PRA
