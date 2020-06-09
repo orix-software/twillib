@@ -82,7 +82,7 @@
 str_slash:
 	.asciiz "/"
 rom_signature:
-	.ASCIIZ   "Empty rom v2020.1"
+	.ASCIIZ   "Empty ram v2020.1"
 
 ; ----------------------------------------------------------------------------
 ; Copyrights address
