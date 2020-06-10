@@ -14,14 +14,19 @@
 ; unsigned char * display_signature_bank(unsigned char ROMRAM, unsigned char sector,  unsigned char bank)
 
 .proc _twil_display_signature_bank
+    sta     current_bank
     sei
     jsr     twil_save_registers
     ; Save banking register
 
     
     ;  switch to right bank
-    and     #%00000111
-    stx     VIA2::PRA
+
+    lda     VIA2::PRA
+    and     #%11111000
+    ora     current_bank
+    sta     VIA2::PRA
+
 
 
     jsr     popa ; sector
@@ -77,6 +82,8 @@
     lda     #<bank_signature
     ldx     #>bank_signature
     rts
+current_bank:
+    .res 1
 save_bank:
     .res 1    
 bank_signature:    
