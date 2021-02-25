@@ -2,7 +2,7 @@
 .importzp ptr1,ptr2,ptr3,tmp1
 .import popax,popa
 
-.include "twilighte.inc"
+.include "twil.inc"
 .include "telestrat.inc"
 
 .include "../libs/usr/arch/include/ch376.inc"

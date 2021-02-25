@@ -1,4 +1,4 @@
-.include "twilighte.inc"
+.include "twil.inc"
 .include "telestrat.inc"
 
 .importzp tmp1,tmp2

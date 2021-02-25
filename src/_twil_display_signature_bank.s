@@ -1,7 +1,7 @@
 .importzp ptr1,ptr2
 .import popa
 
-.include "twilighte.inc"
+.include "twil.inc"
 .include "telestrat.inc"
 
 .import twil_save_registers

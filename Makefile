@@ -18,17 +18,17 @@ endif
 all: $(SOURCES8) $(OBJECTS8)  
 
 $(OBJECTS8): $(SOURCES8)
-	ca65 -ttelestrat $(@:.o=.s) -o $@ 
-	ar65 r twilighte.lib  $@
+	$(AS) -ttelestrat $(@:.o=.s) -o $@ 
+	$(AR) r twil.lib  $@
 	mkdir build/usr/include/ -p
 	mkdir build/usr/arch/include/ -p
 	mkdir build/lib8/ -p
-	cp src/include/twilighte.h build/usr/include/
-	cp src/include/twilighte.inc build/usr/arch/include/
-	cp twilighte.lib build/lib8/
+	cp src/include/twil.h build/usr/include/
+	cp src/include/twil.inc build/usr/arch/include/
+	cp twil.lib build/lib8/
 
 clean:
 	rm src/*.o
-	rm twilighte.lib
+	rm twil.lib
 
 

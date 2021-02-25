@@ -1,4 +1,4 @@
-.include "include/twilighte.inc"
+.include "include/twil.inc"
 
 .export _twil_lib_version
 
