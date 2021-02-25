@@ -1,4 +1,4 @@
-.include "twil.inc"
+.include "include/twil.inc"
 .include "telestrat.inc"
 
 .importzp tmp1,tmp2

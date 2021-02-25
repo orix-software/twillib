@@ -2,7 +2,7 @@
 .importzp ptr1,ptr2,ptr3,tmp1
 .import popax,popa
 
-.include "twil.inc"
+.include "include/twil.inc"
 .include "telestrat.inc"
 
 .include "../libs/usr/arch/include/ch376.inc"
@@ -85,7 +85,7 @@
 str_slash:
 	.asciiz "/"
 rom_signature:
-	.ASCIIZ   "Empty ram v2020.1"
+	.ASCIIZ   "Empty ram v2021.2"
 
 ; ----------------------------------------------------------------------------
 ; Copyrights address
