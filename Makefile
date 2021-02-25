@@ -15,11 +15,13 @@ else
 endif
 
 
-all: $(SOURCES8) $(OBJECTS8)  
+all: $(SOURCES8) $(OBJECTS8) archive
 
 $(OBJECTS8): $(SOURCES8)
 	$(AS) -ttelestrat $(@:.o=.s) -o $@ 
 	$(AR) r twil.lib  $@
+
+archive:	
 	mkdir build/usr/include/ -p
 	mkdir build/usr/arch/include/ -p
 	mkdir build/lib8/ -p
