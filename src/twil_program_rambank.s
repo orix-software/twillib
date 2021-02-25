@@ -5,7 +5,7 @@
 .include "twilighte.inc"
 .include "telestrat.inc"
 
-.include "../dependencies/ch376-lib/src/include/ch376.inc"
+.include "../libs/usr/arch/include/ch376.inc"
 .include "../dependencies/ch376-lib/src/_ch376_wait_response.s"
 .include "../dependencies/ch376-lib/src/_ch376_set_bytes_read.s"
 .include "../dependencies/ch376-lib/src/_ch376_file_open.s"
