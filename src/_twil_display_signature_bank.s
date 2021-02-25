@@ -39,7 +39,7 @@
     sta     TWILIGHTE_REGISTER
     jmp     @go
 @RAM:   
-    ora     #%00111111
+    ora     #%00100000
     sta     TWILIGHTE_REGISTER 
     ; 
 
