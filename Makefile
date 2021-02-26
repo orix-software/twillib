@@ -15,10 +15,17 @@ else
 endif
 
 
-all: $(SOURCES8) $(OBJECTS8) archive
+all: init $(SOURCES8) $(OBJECTS8) archive
+
+init:
+	$(AS) -ttelestrat src/twil_restore_registers.s
+	$(AS) -ttelestrat src/twil_save_registers.s
+	$(AR) r twil.lib  src/twil_restore_registers.o
+	$(AR) r twil.lib  src/twil_save_registers.o
 
 $(OBJECTS8): $(SOURCES8)
 	$(AS) -ttelestrat $(@:.o=.s) -o $@ 
+	$(LD) -tnone $(@:.o) $@ libs/lib8/ch376.lib twil.lib
 	$(AR) r twil.lib  $@
 
 archive:	

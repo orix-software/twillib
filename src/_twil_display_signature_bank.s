@@ -1,5 +1,5 @@
 .importzp ptr1,ptr2
-.import popa
+
 
 .include "include/twil.inc"
 .include "telestrat.inc"
@@ -11,10 +11,12 @@
 
 .define MAX_SIGNATURE_LENGTH 40
 ; ROMRAM : 0 ROM, 1 RAM
-; unsigned char * display_signature_bank(unsigned char ROMRAM, unsigned char sector,  unsigned char bank)
+; unsigned char * display_signature_bank( unsigned char sector,  unsigned char bank)
 
 .proc _twil_display_signature_bank
     sta     current_bank
+    
+    stx     TWILIGHTE_BANKING_REGISTER
     sei
     jsr     twil_save_registers
     ; Save banking register
@@ -29,18 +31,17 @@
 
 
 
-    jsr     popa ; sector
-    sta     TWILIGHTE_BANKING_REGISTER
 
-    jsr     popa ; ROM RAM
-    cmp     #$00 ; ? ROM
-    bne     @RAM
-    and     #%11011111
-    sta     TWILIGHTE_REGISTER
-    jmp     @go
-@RAM:   
-    ora     #%00100000
-    sta     TWILIGHTE_REGISTER 
+
+    ;jsr     popa ; ROM RAM
+    ;cmp     #$00 ; ? ROM
+    ;bne     @RAM
+    ;and     #%11011111
+    ;sta     TWILIGHTE_REGISTER
+    ;jmp     @go
+;@RAM:   
+    ;ora     #%00100000
+    ;sta     TWILIGHTE_REGISTER 
     ; 
 
 @go:

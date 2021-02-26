@@ -6,6 +6,11 @@
 .include "telestrat.inc"
 
 .include "../libs/usr/arch/include/ch376.inc"
+
+;.import _ch376_wait_response
+;.import _ch376_set_bytes_read
+;.import _ch376_file_open
+
 .include "../dependencies/ch376lib/src/_ch376_wait_response.s"
 .include "../dependencies/ch376lib/src/_ch376_set_bytes_read.s"
 .include "../dependencies/ch376lib/src/_ch376_file_open.s"
