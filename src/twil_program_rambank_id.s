@@ -12,15 +12,14 @@
 .import _ch376_file_open
 
 
-
 .import twil_save_registers
 .import twil_restore_registers
 
-; void _twil_program_rambank(unsigned char bank, char *file, unsigned char set);
+; void _twil_program_rambank_id(char *file, unsigned char idbank);
 
-.export _twil_program_rambank
+;.export _twil_program_rambank_id
 
-.proc _twil_program_rambank
+.proc _twil_program_rambank_id
 
 	sta		sector_to_update
 

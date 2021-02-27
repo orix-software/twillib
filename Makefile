@@ -15,22 +15,24 @@ else
 endif
 
 
-all: $(SOURCES8) $(OBJECTS8) archive
+all: init $(SOURCES8) $(OBJECTS8) archive
+
+init:
+	mkdir build/lib8/ -p
 
 $(OBJECTS8): $(SOURCES8)
 	$(AS) -ttelestrat $(@:.o=.s) -o $@ 
-	$(AR) r twil.lib  $@
+	$(AR) r build/lib8/twil.lib  $@
 
 archive:	
 	mkdir build/usr/include/ -p
 	mkdir build/usr/arch/include/ -p
-	mkdir build/lib8/ -p
 	cp src/include/twil.h build/usr/include/
 	cp src/include/twil.inc build/usr/arch/include/
-	cp twil.lib build/lib8/
 
 clean:
 	rm src/*.o
-	rm twil.lib
+	# rm -rf build
+	rm build/lib8/twil.lib
 
 

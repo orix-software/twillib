@@ -1,7 +1,8 @@
 .include "include/twil.inc"
 .include "telestrat.inc"
 
-.importzp tmp1,tmp2
+.export tmp1
+.export tmp2
 
 .import save_bank
 
@@ -19,9 +20,12 @@
 
     ldx     tmp2
     stx     TWILIGHTE_REGISTER
-   
-
-
+ 
     rts
 
 .endproc	
+.bss
+tmp1:
+    .res 1
+tmp2:
+    .res 1

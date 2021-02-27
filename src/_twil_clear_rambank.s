@@ -1,14 +1,15 @@
 
 .importzp ptr1,ptr2,ptr3,tmp1
-.import popax,popa
+
 
 .include "include/twil.inc"
 .include "telestrat.inc"
 
 .include "../libs/usr/arch/include/ch376.inc"
-.include "../dependencies/ch376lib/src/_ch376_wait_response.s"
-.include "../dependencies/ch376lib/src/_ch376_set_bytes_read.s"
-.include "../dependencies/ch376lib/src/_ch376_file_open.s"
+
+.import _ch376_wait_response
+.import _ch376_set_bytes_read
+.import _ch376_file_open
 
 .import twil_save_registers
 .import twil_restore_registers
@@ -17,18 +18,17 @@
 
 .export _twil_clear_rambank
 
-.define TWIL_RAM_BANK_SEEMS_BUSY 2
+
 
 .proc _twil_clear_rambank
 	sei
 	sta		sector_to_update
+    stx     current_bank
 
 
 	jsr     twil_save_registers
 	; on swappe pour que les banques 8,7,6,5 se retrouvent en bas en id : 1, 2, 3, 4
-	
-    jsr     popa ; get bank
-    sta     current_bank
+
 
 
     lda     VIA2::PRA
