@@ -1,3 +1,0 @@
-[submodule "dependencies/ch376-lib"]
-	path = dependencies/ch376-lib
-	url = https://github.com/orix-software/ch376-lib.git
