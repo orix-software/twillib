@@ -1,5 +1,3 @@
-#define TWIL_RAM_BANK_SEEMS_BUSY 2
-
 #define TWIL_BANK_TYPE_ROM 0
 #define TWIL_BANK_TYPE_RAM 1
 

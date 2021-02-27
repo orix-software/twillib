@@ -5,14 +5,11 @@
 .include "include/twil.inc"
 .include "telestrat.inc"
 
+.include "../libs/usr/arch/include/ch376.inc"
+
 .import _ch376_wait_response
 .import _ch376_set_bytes_read
 .import _ch376_file_open
-
-;.include "../libs/usr/arch/include/ch376.inc"
-;.include "../dependencies/ch376lib/src/_ch376_wait_response.s"
-;.include "../dependencies/ch376lib/src/_ch376_set_bytes_read.s"
-;.include "../dependencies/ch376lib/src/_ch376_file_open.s"
 
 .import twil_save_registers
 .import twil_restore_registers
@@ -21,7 +18,7 @@
 
 .export _twil_clear_rambank
 
-.define TWIL_RAM_BANK_SEEMS_BUSY 2
+
 
 .proc _twil_clear_rambank
 	sei

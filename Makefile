@@ -18,26 +18,21 @@ endif
 all: init $(SOURCES8) $(OBJECTS8) archive
 
 init:
-	$(AS) -ttelestrat src/twil_restore_registers.s
-	$(AS) -ttelestrat src/twil_save_registers.s
-	$(AR) r twil.lib  src/twil_restore_registers.o
-	$(AR) r twil.lib  src/twil_save_registers.o
+	mkdir build/lib8/ -p
 
 $(OBJECTS8): $(SOURCES8)
 	$(AS) -ttelestrat $(@:.o=.s) -o $@ 
-	$(LD) -tnone $(@:.o) $@ libs/lib8/ch376.lib twil.lib
-	$(AR) r twil.lib  $@
+	$(AR) r build/lib8/twil.lib  $@
 
 archive:	
 	mkdir build/usr/include/ -p
 	mkdir build/usr/arch/include/ -p
-	mkdir build/lib8/ -p
 	cp src/include/twil.h build/usr/include/
 	cp src/include/twil.inc build/usr/arch/include/
-	cp twil.lib build/lib8/
 
 clean:
 	rm src/*.o
-	rm twil.lib
+	# rm -rf build
+	rm build/lib8/twil.lib
 
 
