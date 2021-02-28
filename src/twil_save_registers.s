@@ -1,8 +1,8 @@
 .include "include/twil.inc"
 .include "telestrat.inc"
 
-.import tmp1
-.import tmp2
+.importzp tmp1
+.importzp tmp2
 
 .export save_bank
 
