@@ -14,6 +14,8 @@
 .import twil_save_registers
 .import twil_restore_registers
 
+.import popa
+
 .export  rom_signature
 
 .export _twil_clear_rambank
@@ -24,13 +26,14 @@
 .proc _twil_clear_rambank
 	sei
 	sta		sector_to_update
-    stx     current_bank
+
 
 
 	jsr     twil_save_registers
 	; on swappe pour que les banques 8,7,6,5 se retrouvent en bas en id : 1, 2, 3, 4
 
-
+    jsr     popa ; get bank
+    sta     current_bank
 
     lda     VIA2::PRA
     and     #%11111000
