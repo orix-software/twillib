@@ -12,3 +12,5 @@ unsigned char twil_clear_rambank(unsigned char bank, unsigned char set);
 unsigned char * twil_display_signature_bank(unsigned char sector,  unsigned char bank);
 unsigned char twil_lib_version(void);
 
+void twil_set_bank_signature(char *signature);
+

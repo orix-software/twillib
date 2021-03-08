@@ -5,21 +5,22 @@
 .include "include/twil.inc"
 .include "telestrat.inc"
 
-.include "../libs/usr/arch/include/ch376.inc"
+;.include "../libs/usr/arch/include/ch376.inc"
 
-.import _ch376_wait_response
-.import _ch376_set_bytes_read
-.import _ch376_file_open
+;.import _ch376_wait_response
+;.import _ch376_set_bytes_read
+;.import _ch376_file_open
 
 .import twil_save_registers
 .import twil_restore_registers
 
-;unsigned char twil_clear_rambank(unsigned char bank, unsigned char set);
+.export  rom_signature
 
 .export _twil_clear_rambank
 
 
 
+;unsigned char twil_clear_rambank(unsigned char bank, unsigned char set);
 .proc _twil_clear_rambank
 	sei
 	sta		sector_to_update
@@ -84,46 +85,12 @@
 
 str_slash:
 	.asciiz "/"
-rom_signature:
-	.ASCIIZ   "Empty ram v2021.2"
 
-; ----------------------------------------------------------------------------
-; Copyrights address
-
-;        .res $FFF1-*
- ;       .org $FFF1
-; $fff1
-;parse_vector:
- ;       .byt $00,$00
-; fff3
-;adress_commands:
- ;       .addr commands_address   
-; fff5        
-;list_commands:
- ;       .addr command1_str
-; $fff7
-;number_of_commands:
- ;       .byt 0
-; RESET $fff8 et 9
-;signature_address:
-        ;.word   rom_signature
-
-; ----------------------------------------------------------------------------
-; RESET $fffA et B
-; Version + ROM Type
-;ROMDEF: 
- ;       .addr rom_start
-
-; ----------------------------------------------------------------------------
-; RESET $fffC et D
-;rom_reset:
- ;       .addr   rom_start
-; ----------------------------------------------------------------------------
-; IRQ Vector
-;empty_rom_irq_vector:
-        ;.addr   IRQVECTOR ; from telestrat.inc (cc65)
 
 .endproc
+
+rom_signature:
+	.ASCIIZ   "Empty ram v2021.2"
 
 current_bank:
     .res	1
