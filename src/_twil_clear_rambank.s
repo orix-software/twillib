@@ -5,31 +5,35 @@
 .include "include/twil.inc"
 .include "telestrat.inc"
 
-.include "../libs/usr/arch/include/ch376.inc"
+;.include "../libs/usr/arch/include/ch376.inc"
 
-.import _ch376_wait_response
-.import _ch376_set_bytes_read
-.import _ch376_file_open
+;.import _ch376_wait_response
+;.import _ch376_set_bytes_read
+;.import _ch376_file_open
 
 .import twil_save_registers
 .import twil_restore_registers
 
-;unsigned char twil_clear_rambank(unsigned char bank, unsigned char set);
+.import popa
+
+.export  rom_signature
 
 .export _twil_clear_rambank
 
 
 
+;unsigned char twil_clear_rambank(unsigned char bank, unsigned char set);
 .proc _twil_clear_rambank
 	sei
 	sta		sector_to_update
-    stx     current_bank
+
 
 
 	jsr     twil_save_registers
 	; on swappe pour que les banques 8,7,6,5 se retrouvent en bas en id : 1, 2, 3, 4
 
-
+    jsr     popa ; get bank
+    sta     current_bank
 
     lda     VIA2::PRA
     and     #%11111000
@@ -84,46 +88,12 @@
 
 str_slash:
 	.asciiz "/"
-rom_signature:
-	.ASCIIZ   "Empty ram v2021.2"
 
-; ----------------------------------------------------------------------------
-; Copyrights address
-
-;        .res $FFF1-*
- ;       .org $FFF1
-; $fff1
-;parse_vector:
- ;       .byt $00,$00
-; fff3
-;adress_commands:
- ;       .addr commands_address   
-; fff5        
-;list_commands:
- ;       .addr command1_str
-; $fff7
-;number_of_commands:
- ;       .byt 0
-; RESET $fff8 et 9
-;signature_address:
-        ;.word   rom_signature
-
-; ----------------------------------------------------------------------------
-; RESET $fffA et B
-; Version + ROM Type
-;ROMDEF: 
- ;       .addr rom_start
-
-; ----------------------------------------------------------------------------
-; RESET $fffC et D
-;rom_reset:
- ;       .addr   rom_start
-; ----------------------------------------------------------------------------
-; IRQ Vector
-;empty_rom_irq_vector:
-        ;.addr   IRQVECTOR ; from telestrat.inc (cc65)
 
 .endproc
+
+rom_signature:
+	.ASCIIZ   "Empty ram v2021.2"
 
 current_bank:
     .res	1

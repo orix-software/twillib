@@ -22,9 +22,9 @@
 
 .proc _twil_program_rambank
 
-	sta		sector_to_update
+	sta     sector_to_update
 
-	jsr 	popax ; Get file
+	jsr     popax ; Get file
 	sta     ptr1
 	stx		ptr1+1
 
