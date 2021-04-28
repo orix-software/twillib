@@ -27,8 +27,6 @@
 	sei
 	sta		sector_to_update
 
-
-
 	jsr     twil_save_registers
 	; on swappe pour que les banques 8,7,6,5 se retrouvent en bas en id : 1, 2, 3, 4
 
@@ -39,7 +37,6 @@
     and     #%11111000
     ora     current_bank
     sta     VIA2::PRA
-    
 	
     lda     sector_to_update ; pour debug FIXME, cela devrait être à 4
     sta  	TWILIGHTE_BANKING_REGISTER
