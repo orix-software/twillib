@@ -2,7 +2,7 @@
 .include "telestrat.inc"
 
 .importzp tmp1
-.importzp tmp2
+.importzp tmp3
 
 .import save_bank
 
@@ -18,7 +18,7 @@
     lda     tmp1
     sta     TWILIGHTE_BANKING_REGISTER
 
-    ldx     tmp2
+    ldx     tmp3
     stx     TWILIGHTE_REGISTER
  
     rts

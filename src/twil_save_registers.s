@@ -2,7 +2,7 @@
 .include "telestrat.inc"
 
 .importzp tmp1
-.importzp tmp2
+.importzp tmp3
 
 .export save_bank
 
@@ -15,7 +15,7 @@
     stx     tmp1
 
     ldx     TWILIGHTE_REGISTER
-    stx     tmp2
+    stx     tmp3
 
     ldx     VIA2::PRA
     stx     save_bank
