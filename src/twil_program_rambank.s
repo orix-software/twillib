@@ -68,8 +68,8 @@
 	sta		TWILIGHTE_REGISTER
 
     sei
-    lda     #$11
-    sta     $bb80
+  ;  lda     #$11
+   ; sta     $bb80
 
 
 	lda		#$00
