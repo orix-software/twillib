@@ -1,6 +1,3 @@
-.importzp ptr1,ptr2,ptr3
-.import popax,popa
-
 .include "include/twil.inc"
 .include "telestrat.inc"
 .include "fcntl.inc"              ; from cc65
@@ -12,40 +9,25 @@
 .import _ch376_set_bytes_read
 .import _ch376_file_open
 
-.import twil_save_registers
-.import twil_restore_registers
 
-; void _twil_program_rambank(unsigned char bank, char *file, unsigned char set);
+.import _twil_get_registers_from_id_bank
+; void twil_load_into_ram_bank(unsigned char bankid, char *buffer);
 
-.export _twil_program_rambank
+; Y contains the bankid
+; A contains the FD
 
-.proc _twil_program_rambank
+.export twil_load_into_ram_bank
 
-	sta     sector_to_update
+.proc twil_load_into_ram_bank
+	sta     RES ; Save FD
 
-	jsr     popax ; Get file
-	sta     ptr1
-	stx		ptr1+1
-
-    jsr     popa ; get bank
+    tya
+    jsr     _twil_get_registers_from_id_bank
+    stx     sector_to_update
     sta     current_bank
+    ;
 
 
-
-    ldy     #O_RDONLY
-
-	lda     ptr1
-	ldx	    ptr1+1
-	.byte   $00,XOPEN
-	
-	cmp		#$FF
-	bne		@start
-	cpx		#$FF
-	bne		@start		
-
-	lda		#$01
-
-	rts
 
 @start:
 	sei
@@ -66,15 +48,13 @@
 	sta		TWILIGHTE_REGISTER
 
     sei
-  ;  lda     #$11
-    ;sta     $bb80
 
 
 	lda		#$00
-	sta		ptr3
+	sta		RESB
 
 	lda		#$C0
-	sta		ptr3+1	
+	sta		RESB+1	
 
     lda		#$00
     ldy     #$40
@@ -95,7 +75,7 @@
 @read_byte:
 	
     lda		CH376_DATA
-	sta		(ptr3),y
+	sta		(RESB),y
     iny
 
 @skip_change_bank:
@@ -105,11 +85,11 @@
     
     tya     
     clc
-    adc     ptr3
+    adc     RESB
     bcc     @skip_inc
-    inc     ptr3+1
+    inc     RESB+1
 @skip_inc:
-    sta     ptr3    
+    sta     RESB    
 
     lda		#CH376_BYTE_RD_GO
     sta		CH376_COMMAND
@@ -134,3 +114,38 @@ sector_to_update:
     .res    1
 nb_bytes:
     .res    1
+tmp1:
+    .res    1
+tmp3: 
+    .res    1    
+.proc	twil_restore_registers
+    
+    ldx     save_bank
+    stx     VIA2::PRA
+
+    lda     tmp1
+    sta     TWILIGHTE_BANKING_REGISTER
+
+    ldx     tmp3
+    stx     TWILIGHTE_REGISTER
+ 
+    rts
+
+.endproc	
+
+.proc	twil_save_registers
+    ldx     TWILIGHTE_BANKING_REGISTER
+    stx     tmp1
+
+    ldx     TWILIGHTE_REGISTER
+    stx     tmp3
+
+    ldx     VIA2::PRA
+    stx     save_bank
+
+    rts
+
+.endproc	
+.bss
+save_bank:    
+    .res      1    
