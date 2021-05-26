@@ -20,4 +20,5 @@ void twil_set_bank_signature(char *signature);
 
 unsigned char twil_get_registers_from_id_bank(unsigned char bank);
 
+void _twil_program_rambank_id(char *file, unsigned char idbank);
 
