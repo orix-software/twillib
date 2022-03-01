@@ -22,6 +22,7 @@
     ; Impossible to have bank 0
     tax    
     rts
+
 set:
     .byte 0,0,0,0,1,1,1,1
     .byte 1,1,1,1,1,1,1,1
@@ -46,3 +47,4 @@ bank:
     .byte 4
 
 .endproc
+

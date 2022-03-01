@@ -27,6 +27,8 @@ $(OBJECTS8): $(SOURCES8)
 archive:	
 	mkdir build/usr/include/ -p
 	mkdir build/usr/arch/include/ -p
+	mkdir build/usr/src/twillib/asm -p
+	cp    src/*.s build/usr/src/twillib/asm/
 	cp src/include/twil.h build/usr/include/
 	cp src/include/twil.inc build/usr/arch/include/
 
