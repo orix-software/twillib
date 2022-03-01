@@ -9,7 +9,7 @@
 
 .importzp tmp1
 
-;unsigned char _twil_get_id_bank(unsigned char bank unsigned char set)
+;unsigned char _twil_get_id_bank(unsigned char bank, unsigned char set)
 .proc _twil_get_id_bank
     
     tax             ; Save

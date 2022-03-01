@@ -12,8 +12,11 @@
 
 .proc	twil_restore_registers
     
-    ldx     save_bank
-    stx     VIA2::PRA
+
+    lda     VIA2::PRA
+    and     #%11111000
+    ora     save_bank
+    sta     VIA2::PRA
 
     lda     tmp1
     sta     TWILIGHTE_BANKING_REGISTER
