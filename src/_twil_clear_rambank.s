@@ -48,7 +48,7 @@
     lda     #<IRQVECTOR
     ;cmp     $FFFE
     sta     $FFFE
-    
+
     lda     #>IRQVECTOR
     sta     $FFFF
 
@@ -64,8 +64,13 @@
     lda     #$00
     sta     $fff7
 
+    ; Clear ID bank
+    sta     $FFED
+    sta     $FFEE
+    sta     $FFEF
+
     ldx     #$00
-@L1:    
+@L1:
     lda     rom_signature,x
     beq     @out
     sta     $c000,x
