@@ -1,13 +1,8 @@
-
 ; a contains the id of the command
-; It returns : 
-; 
+; It returns :
+;
 
 .export _twil_get_registers_from_id_bank
-
-.import popa
-
-.importzp tmp1
 
 ;unsigned char twil_get_registers_from_id_bank(unsigned char bank);
 .proc _twil_get_registers_from_id_bank
@@ -20,31 +15,51 @@
     rts
 @bank0:
     ; Impossible to have bank 0
-    tax    
+    tax
     rts
 
 set:
-    .byte 0,0,0,0,1,1,1,1
-    .byte 1,1,1,1,1,1,1,1
-    .byte 1,1,1,1,1,1,1,1
-    .byte 1,1,1,1,1,1,1,1
+    ; Rom
+    .byt 0
+    .byte    0,0,0,0
+    .byte    4,4,4,4
+    .byte    1,1,1,1
+    .byte    5,5,5,5
+    .byte    2,2,2,2
+    .byte    6,6,6,6
+    .byte    3,3,3,3
+    .byte    7,7,7,7
 
-    .byte 0,0,0,0,0,1,1,1
-    .byte 1,2,2,2,2,3,3,3
-    .byte 3,4,4,4,4,5,5,5
-    .byte 5,6,6,6,6,7,7,7,7    
+    ; Ram
+    .byte    0,0,0,0
+    .byte    1,1,1,1
+    .byte    2,2,2,2
+    .byte    3,3,3,3
+    .byte    4,4,4,4
+    .byte    5,5,5,5
+    .byte    6,6,6,6
+    .byte    7,7,7,7
 
 bank:
-    .byte 1,2,3,4,1,1,1,1
-    .byte 3,1,1,1,1,1,1,1
-    .byte 3,1,1,1,1,1,1,1
-    .byte 3,1,1,1,1,1,1,1
+    .byt 0
+    ; Rom
+    .byte    1,2,3,4
+    .byte    1,2,3,4
+    .byte    1,2,3,4
+    .byte    1,2,3,4
+    .byte    1,2,3,4
+    .byte    1,2,3,4
+    .byte    1,2,3,4
+    .byte    1,2,3,4
 
-    .byte 0,1,2,3,4,1,2,3
-    .byte 4,1,2,3,4,1,2,3
-    .byte 4,1,2,3,4,1,2,3
-    .byte 4,1,2,3,4,1,2,3
-    .byte 4
+    ; Ram
+    .byte    1,2,3,4
+    .byte    1,2,3,4
+    .byte    1,2,3,4
+    .byte    1,2,3,4
+    .byte    1,2,3,4
+    .byte    1,2,3,4
+    .byte    1,2,3,4
+    .byte    1,2,3,4
 
 .endproc
-
