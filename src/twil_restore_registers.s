@@ -11,21 +11,25 @@
 ; not available from c
 
 .proc	twil_restore_registers
-    
+    ;;@brief Restore essentials Twilighte board register : Can be used in eeprom or EEPROM
+    ;;@inputA TWILIGHTE_BANKING_REGISTER backup
+    ;;@inputX TWILIGHTE_REGISTER backup
+    ;;@inputY Bank backup
+    ;;@```ca65
+    ;;@`  lda       #$01 ; TWILIGHTE_BANKING_REGISTER
+    ;;@`  ldx       #$01 ; TWILIGHTE_REGISTER
+    ;;@`  ldy       #$01 ; bank
+    ;;@`  jsr       twil_restore_registers
+    ;;@`  rts
+    ;;@```
 
-    lda     VIA2::PRA
-    and     #%11111000
-    ora     save_bank
-    sta     VIA2::PRA
-
-    lda     tmp1
     sta     TWILIGHTE_BANKING_REGISTER
-
-    ldx     tmp3
     stx     TWILIGHTE_REGISTER
- 
+
+    tya
+    and     #%11111000
+    ora     VIA2::PRA
+    sta     VIA2::PRA
     rts
 
-.endproc	
-
-
+.endproc

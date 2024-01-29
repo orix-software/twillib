@@ -30,18 +30,16 @@
     jsr     popa ; get bank
     sta     current_bank
 
-
-
     ldy     #O_RDONLY
 
 	lda     ptr1
 	ldx	    ptr1+1
 	.byte   $00,XOPEN
-	
+
 	cmp		#$FF
 	bne		@start
 	cpx		#$FF
-	bne		@start		
+	bne		@start
 
 	lda		#$01
 
@@ -56,7 +54,6 @@
     and     #%11111000
     ora     current_bank
     sta     VIA2::PRA
-    
 
     lda     sector_to_update ; pour debug FIXME, cela devrait être à 4
     sta  	TWILIGHTE_BANKING_REGISTER
@@ -66,15 +63,11 @@
 	sta		TWILIGHTE_REGISTER
 
     sei
-  ;  lda     #$11
-    ;sta     $bb80
-
-
 	lda		#$00
 	sta		ptr3
 
 	lda		#$C0
-	sta		ptr3+1	
+	sta		ptr3+1
 
     lda		#$00
     ldy     #$40
@@ -93,7 +86,6 @@
     ldy    #$00
 
 @read_byte:
-	
     lda		CH376_DATA
 	sta		(ptr3),y
     iny
@@ -102,14 +94,14 @@
 
     dec		nb_bytes
     bne		@read_byte
-    
-    tya     
+
+    tya
     clc
     adc     ptr3
     bcc     @skip_inc
     inc     ptr3+1
 @skip_inc:
-    sta     ptr3    
+    sta     ptr3
 
     lda		#CH376_BYTE_RD_GO
     sta		CH376_COMMAND
