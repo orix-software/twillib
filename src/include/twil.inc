@@ -4,9 +4,12 @@
 .define TWIL_LIB_VERSION_2022_1     $03
 .define TWIL_LIB_VERSION_2022_4     $04
 .define TWIL_LIB_VERSION_2023_2     $05
+.define TWIL_LIB_VERSION_2024_1     $06
 
 .define TWILIGHTE_REGISTER          $342
 .define TWILIGHTE_BANKING_REGISTER  $343
+
+libzp := $F0
 
 .struct twil_bank_struct
     id_bank                   .res 1

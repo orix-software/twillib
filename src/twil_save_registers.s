@@ -11,18 +11,24 @@
 ; not available from c
 
 .proc	twil_save_registers
-    ldx     TWILIGHTE_BANKING_REGISTER
-    stx     tmp1
+    ;;@brief Save essentials Twilighte board register. Can be used in eeprom bank or ram bank
+    ;;@modifyA
+    ;;@modifyX
+    ;;@modifyY
+    ;;@returnsA TWILIGHTE_BANKING_REGISTER value
+    ;;@returnsX TWILIGHTE_REGISTER value
+    ;;@returnsY current bank value
+    ;;@```ca65
+    ;;@`  jsr       twil_save_registers
+    ;;@`  rts
+    ;;@```
 
+    lda     TWILIGHTE_BANKING_REGISTER
     ldx     TWILIGHTE_REGISTER
-    stx     tmp3
-
-    ldx     VIA2::PRA
-    stx     save_bank
-
+    ldy     VIA2::PRA
     rts
 
-.endproc	
+.endproc
 .bss
-save_bank:    
-    .res      1    
+save_bank:
+    .res      1

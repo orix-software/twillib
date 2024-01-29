@@ -3,9 +3,29 @@
 ;
 
 .export _twil_get_registers_from_id_bank
+.export twil_get_registers_from_id_bank
 
 ;unsigned char twil_get_registers_from_id_bank(unsigned char bank);
 .proc _twil_get_registers_from_id_bank
+    ; Follow
+.endproc
+
+.proc twil_get_registers_from_id_bank
+    ;;@brief Convert logical bank number into set and bank id
+    ;;@inputA Logical bank number to convert
+    ;;@inputY Bank
+    ;;@modifyA
+    ;;@modifyX
+    ;;@modifyY
+    ;;@returnsA Bank
+    ;;@returnsX Set (banking register)
+    ;;@```ca65
+    ;;@`  lda       #$03 ;  set 3
+    ;;@`  ldy       #$03 ;  bank3
+    ;;@`  jsr       twil_get_id_bank
+    ;;@`  ; A contains the logical bank
+    ;;@`  rts
+    ;;@```
     cmp     #$00
     beq     @bank0
     tay
@@ -63,3 +83,4 @@ bank:
     .byte    1,2,3,4
 
 .endproc
+
